@@ -1,0 +1,552 @@
+{
+  "$id": "base/common_properties_v3_0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Common Reusable Property Definitions",
+  "description": "Schema for the RISNET properties that multiple objects use",
+  "type": "object",
+  "properties": {
+    "abs_height_cm": {
+      "description": "Absolute height of the bridge based upon the used reference level for heights.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "abs_height_open_cm": {
+      "description": "Absolute height of the opearable object (if applicable) based upon the used reference level for heights.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "berth_ref": {
+      "description": "RIS_ID of the Berth object this object is belonging to.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "berth_refs": {
+      "description": "Comma separated list of RIS_IDs of the Berth object(s) that are linked (max 20 refs).",
+      "oneOf": [
+        {
+          "type": "string",
+          "maxLength": 739
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bridge_ref": {
+      "description": "RIS_ID of the Bridge object this object is belonging to.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "cl_height_cm": {
+      "description": "Available height in cm based on the reference height (height_ref) of the object.",
+      "type": "integer"
+    },
+    "cl_height_open_cm": {
+      "description": "Available height in cm of the operable object in opened condition.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "cl_length_cm": {
+      "description": "Available length in cm of the object.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "cl_width_cm": {
+      "description": "Available width in cm of the object.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "clsdng": {
+      "description": "Class of dangerous goods, for which the berth can be used. Allowed Values: 1 (one blue light / cone), 2 (two blue lights / cones), 3 (three blue lights / cones), 4 (no blue light / cone), 5 (one red light / red cone top down.",
+      "oneOf": [
+        {
+          "type": "integer",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "direction": {
+      "description": "Relevant direction for the object. Allowed values: UPS (upstream), DWN (downstream), ALL (all directions)",
+      "type": "string",
+      "enum": [
+        "UPS",
+        "DWN",
+        "ALL"
+      ],
+      "default": "ALL"
+    },
+    "distance_mark_ref": {
+      "description": "Reference to a distance_mark for the object used by the voyage calculator",
+      "type": "string",
+      "format": "uuid"
+    },
+    "comex_section_ref": {
+      "description": "Combined code (CNTRYCODE + FW_CODE + SEQ_NR) for backwards compatibility with COMEX. In RIS COMEX RNM 2.3.1 this attribute is called CODE and is the main identifier of a fairway section (optional)",
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 12
+    },
+    "down_fairway_km": {
+      "description": "Fairway km of the downstream node, by which the network section is formed and connected to others.",
+      "type": "number",
+      "multipleOf": 0.1
+    },
+    "entry_exit_distance_mark_refs": {
+      "description": "RIS_IDs of the distance mark objects that are the entry/exit points towards the port (comma separated). Max 20 items.",
+      "oneOf": [
+        {
+          "type": "string",
+          "maxLength": 739
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "entry_exit_lock_refs": {
+      "description": "RIS_IDs of the locks that are the entry/exit points towards the port (comma separated). Max 20 items.",
+      "oneOf": [
+        {
+          "type": "string",
+          "maxLength": 739
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "fairway_from_km": {
+      "description": "Fairway km indication covering the range (start) of the object along the fairway.",
+      "type": "number",
+      "multipleOf": 0.001
+    },
+    "fairway_km": {
+      "description": "Fairway kilometer indication, to serve as landmark assisting orientation rather than as basis for distance calculations",
+      "type": "number",
+      "multipleOf": 0.001
+    },
+    "fairway_ref": {
+      "description": "Reference to the most important river/canal associated with the object.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "fairway_section_code": {
+      "description": "The Fairway Section Code has to be assigned by the national authorities. It represents the coding of a waterway section within a national network and is only unique in combination with the country code.",
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 5
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "fairway_to_km": {
+      "description": "Fairway km indication covering the range (end) of the object along the fairway. Can be omitted if equal to fairway_from_km.",
+      "oneOf": [
+        {
+          "type": "number",
+          "multipleOf": 0.001
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gauge_ref": {
+      "description": "RIS_ID of the reference gauge station, providing water level information for the calculation of actual clearance height.",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "harbour_basin_ref": {
+      "description": "RIS_ID of the Harbour basin object the object is belonging to.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "harbour_ref": {
+      "description": "RIS_ID of the Harbour object the object is belonging to.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "height_ref_level_name": {
+      "description": "Code of the Reference Height, from which the clearance height is measured. The reference height is based on the zero point of the gauge (ZPG) specified in the Gauge object.",
+      "oneOf": [
+        {
+          "type": "string",
+          "maxLength": 10
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lock_basin_ref": {
+      "description": "RIS_ID of the related lock basin if the object belongs to a lock basin.",
+      "oneOf": [
+        {
+          "type": "string", 
+          "format": "uuid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lock_ref": {
+      "description": "RIS_ID of the Lock object the object is belonging to.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "max_draught_cm": {
+      "description": "Maximum allowed draught of the vessel in cm. This shall be a fall-back default value for all ship categories, if no Sailing Dimensions table is provided.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "max_height_cm": {
+      "description": "Maximum allowed height of the vessel in cm.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "max_height_open_cm": {
+      "description": "Maximum allowed height of the vessel in cm when the object is operable and open.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "max_length_cm": {
+      "description": "Maximum allowed length of the vessel in cm as given in legal regulations. This shall be a fall-back default value for all ship categories, if no Sailing Dimensions table is provided.",
+      "type": "integer"
+    },
+    "max_width_cm": {
+      "description": "Maximum allowed width of the vessel in cm as given in legal regulations. This shall be a fall-back default value for all ship categories, if no Sailing Dimensions table is provided",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "min_draught_cm": {
+      "description": "Minimum allowed draught of the vessel in cm.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "min_height_cm": {
+      "description": "Minimum allowed height of the vessel in cm.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "min_length_cm": {
+      "description": "Minimum allowed length of the vessel in cm.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "min_width_cm": {
+      "description": "Minimum allowed width of the vessel in cm.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "network_section_ref": {
+      "description": "RIS_ID of the network section the object lies on.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "object_ref": {
+      "description": "RIS_ID of the already existing related object in RIS.net",
+      "type": "string",
+      "format": "uuid"
+    },
+    "object_reference_code": {
+      "description": "Object Reference Code, if needed for Electronic Reporting purposes.",
+      "type": "string",
+      "maxLength": 5
+    },
+    "object_type": {
+      "description": "Entity type name of the referenced object, e.g. distance_mark, berth, marina, harbour, harbour_basin, port, terminal",
+      "type": "string",
+      "maxLength": 50
+    },
+    "operation_mode": {
+      "description": "Operational mode an object may be passed by a vessel. Allowed values: 1 (Passable, requiring operation), 2 (Passable, no operation required), 3 (Not passable).",
+      "oneOf": [
+        {
+          "type": "integer",
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "operation_type": {
+      "description": "How the object is operated. Allowed values: 0 (Local Operation), 1 (Remote Operation), 2 (Self-Service), 3 (Automatic), 4 (not applicable), null (unknown)",
+      "oneOf": [
+        {
+          "type": "integer",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "orient": {
+      "description": "Orientation of the object in degrees (0 = north) for map presentation.",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 359
+    },
+    "pass_duration_minute": {
+      "description": "Average passage duration in minutes, if the object is operable . ETD = ETA + pass_duration_minute",
+      "type": "integer",
+      "minimum": 0
+    },
+    "port_ref": {
+      "description": "RIS_ID of the Port object the object may belong to.",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "position": {
+      "description": "Position of the gate if it belongs to a lock. Allowed values: UPS (upstream), MI (middle), DWN (downstream)",
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "UPS",
+            "MI",
+            "DWN"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "private_status": {
+      "description": "Public/private status of the object. Allowed values: 1 (public), 2 (private), 3 (unknown).",
+      "type": "integer",
+      "enum": [
+        1,
+        2,
+        3
+      ],
+      "default": 3
+    },
+    "safety_margin_cm": {
+      "description": "Safety margin in cm to be subtracted for calculation of actual clearance height.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ship_category": {
+      "description": "Allowed vessel types. Allowed values are defined in the spreadsheet 'Shipcategory'. Recommended Values: 10000 (Sea), 32000 (Cargo), 31000 (Passenger), 20000 (Recreational crafts), 21000 (sail), 22000 (motorized).",
+        "oneOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ]
+    },
+    "strategic_point_type": {
+      "description": "Type of priority applying for the strategic point. Allowed values: 0 (not applicable), 1 (Voyage description + ETA), 2 (ETA calculation), 3 (ERI related + ETA)",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3
+    },
+    "supplies": {
+      "description": "Available supplies. Allowed values: 1 (drinking water), 2 (electrical power), 3 (fuel), 4 (put car ashore), 5 (bilge water disposal), 6 (paper waste disposal), 7 (plastic waste disposal), 8 (glass waste disposal), 9 (residual waste disposal), 10 (oil waste disposal), 11 (organic waste disposal), 12 (dangerous waste disposal), 13 (sewage water disposal)",
+      "oneOf": [
+        {
+          "type": "string",
+          "maxLength": 30
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tentec": {
+      "description": "Indicates whether the network section is part of the TENtec network or not, and if this is the country 'providing' the info. true = Network Section is part of the TENtec Network. false = Network Section is not part of the TENtec Network",
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "un_locode": {
+      "description": "5-Digit UN Location Code in which the object lies. The first two digits specify the country.",
+      "oneOf": [
+        {
+          "type": "string",
+          "maxLength": 5
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "un_loname": {
+      "description": "Location name according to the UN: name of city or municipality in national language (see instructions at https://service.unece.org/trade/locode/Service/LocodeColumn.htm#Name).",
+      "oneOf": [
+        {
+          "type": "string",
+          "maxLength": 80
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "up_fairway_km": {
+      "description": "Fairway km of the upstream node, by which the network section is formed and connected to others.",
+      "type": "number",
+      "multipleOf": 0.1
+    },
+    "vertical_clearance_datum": {
+      "description": "Type of the Waterlevel reference height (CM).",
+      "oneOf": [
+        {
+          "type": "string",
+          "maxLength": 10
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vertical_clearance_val_cm": {
+      "description": "Waterlevel reference height based on the reference code (see HEIGHT_REF) (CM).",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

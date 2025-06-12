@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gate_v3_0.json",
+  "title": "RISNET gate schema",
+  "type": "object",
+  "required": [
+    "type",
+    "features"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "FeatureCollection"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "title": "GeoJSON Feature",
+        "type": "object",
+        "required": [
+          "type",
+          "properties",
+          "geometry"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Feature"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "base/baseobject_v3_0.json"
+              }
+            ],
+            "properties": {
+              "barrage_ref": {
+                "description": "RIS_ID of the related barrage if the gate belongs to a barrage.",
+                "oneOf": [{"type": "string", "format": "uuid"}, {"type": "null"}]
+              },
+              "lock_basin_ref": {
+                "$ref": "base/common_properties_v3_0.json#/properties/lock_basin_ref"
+              },
+              "lock_basin_part_up_ref": {
+                  "description": "RIS_ID of the related upstream oriented lock basin part if lock basin parts are provided for the lock basin.",
+                  "oneOf": [{"type": "string", "format": "uuid"}, {"type": "null"}]
+              },
+              "lock_basin_part_down_ref": {
+                  "description": "RIS_ID of the related downstream oriented lock basin part if lock basin parts are provided for the lock basin.",
+                  "oneOf": [{"type": "string", "format": "uuid"}, {"type": "null"}]
+              },
+              "gauge_ref": {
+                "$ref": "base/common_properties_v3_0.json#/properties/gauge_ref"
+              },
+              "height_ref_level_name": {
+                "$ref": "base/common_properties_v3_0.json#/properties/height_ref_level_name"
+              },
+              "vertical_clearance_val_cm": {
+                "$ref": "base/common_properties_v3_0.json#/properties/vertical_clearance_val_cm"
+              },
+              "vertical_clearance_datum": {
+                "$ref": "base/common_properties_v3_0.json#/properties/vertical_clearance_datum"
+              },
+              "safety_margin_cm": {
+                "$ref": "base/common_properties_v3_0.json#/properties/safety_margin_cm"
+              },
+              "cl_height_open_cm": {
+                "$ref": "base/common_properties_v3_0.json#/properties/cl_height_open_cm"
+              },
+              "abs_height_open_cm": {
+                "$ref": "base/common_properties_v3_0.json#/properties/abs_height_open_cm"
+              },
+              "max_height_open_cm": {
+                "$ref": "base/common_properties_v3_0.json#/properties/max_height_open_cm"
+              },
+              "cl_width_cm": {
+                "$ref": "base/common_properties_v3_0.json#/properties/cl_width_cm"
+              },
+              "max_width_cm": {
+                "$ref": "base/common_properties_v3_0.json#/properties/max_width_cm"
+              },
+              "max_draught_cm": {
+                "$ref": "base/common_properties_v3_0.json#/properties/max_draught_cm"
+              },
+              "gate_type": {
+                  "description": "This attribute indicates the type of the gate. Allowed values: 1 (Swing Gate), 2 (Lift Gate), 3 (Other)",
+                  "type": "integer",
+                  "enum": [1, 2, 3]
+              },
+              "gate_function": {
+                  "description": "This attribute indicates the function of the gate. Allowed values: 1 (Lock Gate), 2 (Harbour Gate), 3 (Flood Gate), 4 (Other)",
+                  "type": "integer",
+                  "enum": [1, 2, 3, 4]
+              },
+              "operation_type": {
+                "$ref": "base/common_properties_v3_0.json#/properties/operation_type"
+              },
+              "position": {
+                "$ref": "base/common_properties_v3_0.json#/properties/position"
+              }
+            },
+            "required": [ "gate_type", "gate_function"],
+            "unevaluatedProperties": false
+          },
+          "geometry": {"$ref": "base/GeoJSONPoint_v3_0.json"}
+        }
+      }
+    }
+  }
+}

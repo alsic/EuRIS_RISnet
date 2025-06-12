@@ -1,0 +1,78 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "network_section_cb_v3_0.json",
+    "title": "RISNET network_section_cb schema",
+    "type": "object",
+    "required": [
+      "type",
+      "features"
+    ],
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": ["FeatureCollection"]
+      },
+      "features": {
+        "type": "array",
+        "items": {
+          "title": "GeoJSON Feature",
+          "type": "object",
+          "required": ["type", "properties", "geometry"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["Feature"]
+            },
+            "properties": {
+              "type": "object",
+              "allOf": [
+                {
+                  "$ref": "base/baseobject_v3_0.json"
+                }
+              ],
+              "properties": {
+                "network_section_ref": {
+                  "description": "RIS_ID of the same network section in the RIS.net of the other country, which shares the common border and is responsible for providing the geometric data.",
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "up_fairway_km": {
+                  "description": "Fairway km of the upstream node, by which the network section is formed and connected to others.",
+                  "type": "number",
+                  "multipleOf": 0.001
+                },
+                "down_fairway_km": {
+                  "description": "Fairway km of the downstream node, by which the network section is formed and connected to others.",
+                  "type": "number",
+                  "multipleOf": 0.001
+                },
+                "fairway_section_code": {
+                  "description": "The Fairway Section Code represents the coding of a waterway section within a national network and is only unique in combination with the country code.",
+                  "type": "string",
+                  "maxLength": 5
+                },
+                "comex_section_ref": {
+                  "description": "COMEX section reference code (CNTRYCODE + FW_CODE + SEQ_NR), included for backwards compatibility.",
+                  "type": "string",
+                  "maxLength": 12
+                },
+                "tentec": {
+                  "description": "Indicates whether the corresponding network section is part of the TENtec network or not. true = is part, false = is not.",
+                  "oneOf": [
+                    { "type": "boolean" },
+                    { "type": "null" }
+                  ]
+                }
+              },
+              "required": ["network_section_ref"],
+              "unevaluatedProperties": false
+            },
+            "geometry": {
+              "$ref": "base/GeoJSONLineString_v3_0.json"
+            }
+          }
+        }
+      }
+    }
+  }
+  

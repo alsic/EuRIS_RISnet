@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "translation_v3_0.json",
+  "title": "RISNET translation schema",
+  "type": "array",
+  "items": {
+    "properties": {
+      "id": {
+        "description": "Internal id of the record",
+        "type": "string",
+        "format": "uuid"
+      },
+      "object_ref": {
+        "description": "RIS_ID of the related object.",
+        "type": "string",
+        "format": "uuid"
+      },
+      "object_type": {
+        "description": "Entity type name of the related object.",
+        "type": "string",
+        "maxLength": 50
+      },
+      "language": {
+        "description": "ISO 639-1 language code",
+        "type": "string",
+        "pattern": "^[a-z]{2}$"
+      },
+      "name_translated": {
+        "description": "The translated object name",
+        "type": "string",
+        "maxLength": 80
+      },
+      "remark_translated": {
+        "description": "The translated object remark",
+        "oneOf": [
+          {
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "default": {
+        "description": "Flag the indicate that the translation should be considered as the official one. The other records for the same object/language can be treated as aliases.",
+        "oneOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": true
+      }
+    },
+    "required": [
+      "id",
+      "object_ref",
+      "object_type",
+      "language",
+      "name_translated"
+    ],
+    "unevaluatedProperties": false
+  }
+} 

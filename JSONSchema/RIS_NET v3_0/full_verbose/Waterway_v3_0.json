@@ -1,0 +1,12 @@
+{
+    "$id": "waterway_v3_0.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RISNET waterway schema",
+    "description": "Schema for the RISNET waterway type",
+    "type": "array",
+    "items": {
+      "allOf": [{"$ref": "base/baseobject_v3_0.json"}],
+      "unevaluatedProperties": false
+    },
+    "unevaluatedProperties": false
+  }

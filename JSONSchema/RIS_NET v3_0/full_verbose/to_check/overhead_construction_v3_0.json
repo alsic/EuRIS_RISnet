@@ -1,0 +1,125 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "overhead_construction_v3_0.json",
+    "title": "RISNET overhead_construction schema",
+    "type": "object",
+    "required": [
+      "type",
+      "features"
+    ],
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": ["FeatureCollection"]
+      },
+      "features": {
+        "type": "array",
+        "items": {
+          "title": "GeoJSON Feature",
+          "type": "object",
+          "required": [
+            "type",
+            "properties",
+            "geometry"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["Feature"]
+            },
+            "properties": {
+              "type": "object",
+              "allOf": [
+                {
+                  "$ref": "base/baseobject_v3_0.json"
+                }
+              ],
+              "properties": {
+                "network_section_ref": {
+                  "description": "RIS_ID of the network section the object lies on.",
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "gauge_ref": {
+                  "description": "RIS_ID of the reference gauge station, providing water level information for the calculation of actual clearance height of a overhead construction.",
+                  "oneOf": [{ "type": "string", "format": "uuid" }, { "type": "null" }]
+                },
+                "un_locode": {
+                  "description": "5-Digit UN Location Code in which the object lies. The first two digits specify the country.",
+                  "oneOf": [{ "type": "string", "maxLength": 5 }, { "type": "null" }]
+                },
+                "un_loname": {
+                  "description": "Location name according to the UN: name of city or municipality in national language (see instructions at https://service.unece.org/trade/locode/Service/LocodeColumn.htm#Name).",
+                  "oneOf": [{ "type": "string", "maxLength": 80 }, { "type": "null" }]
+                },
+                "fairway_km": {
+                  "description": "Fairway km indication: The value shall be given in km with a maximum of 3 decimal digits. The value shall not serve as the basis for distance calculations (this shall be done via the coordinates of the geo-object).",
+                  "type": "number",
+                  "multipleOf": 0.001
+                },
+                "oc_type": {
+                  "description": "Type of Overhead Construction. Allowed values: 0 (unknown), 1 (cable), 2 (pipe), 3 (conveyor).",
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 3
+                },
+                "height_ref_level_name": {
+                  "description": "Code of the Reference Height, from which the clearance height of the overhead construction is measured. The reference height is based on the zero point of the gauge (ZPG).",
+                  "oneOf": [{ "type": "string", "maxLength": 10 }, { "type": "null" }]
+                },
+                "vertical_clearance_val_cm": {
+                  "description": "Waterlevel reference height based on the reference code (see HEIGHT_REF) (CM).",
+                  "oneOf": [{ "type": "integer" }, { "type": "null" }]
+                },
+                "vertical_clearance_datum": {
+                  "description": "Type of the Waterlevel reference height (CM) (IENC: VERDAT).",
+                  "oneOf": [{ "type": "string", "maxLength": 10 }, { "type": "null" }]
+                },
+                "safety_margin_cm": {
+                  "description": "Safety margin in cm to be subtracted for calculation of actual clearance height.",
+                  "oneOf": [{ "type": "integer" }, { "type": "null" }]
+                },
+                "cl_height_cm": {
+                  "description": "Available height in cm based on the reference height (height_ref) of the overhead construction.",
+                  "type": "integer"
+                },
+                "abs_height_cm": {
+                  "description": "Absolute height of the bridge based upon the used reference level for heights.",
+                  "oneOf": [{ "type": "integer" }, { "type": "null" }]
+                },
+                "max_height_cm": {
+                  "description": "Maximum allowed height of the vessel in cm. This shall be a fall-back default value for all ship categories, if no Sailing Dimensions table is provided.",
+                  "oneOf": [{ "type": "integer" }, { "type": "null" }]
+                },
+                "cl_width_cm": {
+                  "description": "Available width in cm of (the fairway underneath) the Overhead Construction.",
+                  "oneOf": [{ "type": "integer" }, { "type": "null" }]
+                },
+                "max_width_cm": {
+                  "description": "Maximum allowed width of the vessel in cm. This shall be a fall-back default value for all ship categories, if no Sailing Dimensions table is provided.",
+                  "oneOf": [{ "type": "integer" }, { "type": "null" }]
+                },
+                "orient": {
+                  "description": "Orientation of the overhead construction in degrees (0 = north) for map presentation.",
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 359
+                }
+              },
+              "required": [
+                "network_section_ref",
+                "fairway_km",
+                "cl_height_cm"
+              ],
+              "unevaluatedProperties": false
+            },
+            "geometry": {
+              "$ref": "base/GeoJSONPoint_v3_0.json"
+            }
+          }
+        }
+      }
+    }
+  }
+
+  

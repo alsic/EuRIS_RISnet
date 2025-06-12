@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "bridge_opening_v3_0.json",
+  "title": "RISNET bridge_opening schema",
+  "type": "object",
+  "required": [
+    "type",
+    "features"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "FeatureCollection"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "title": "GeoJSON Feature",
+        "type": "object",
+        "required": [
+          "type",
+          "properties",
+          "geometry"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Feature"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "base/baseobject_v3_0.json"
+              }
+            ],
+            "properties": {
+              "bridge_ref": {
+                "description": "RIS_ID of the Bridge object the Bridge Opening is belonging to.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "cl_height_cm": {
+                "description": "Available height in cm based on the reference height (vertical clearance datum) of the bridge.",
+                "type": "integer"
+              },
+              "cl_height_open_cm": {
+                "description": "Available height in cm of the operable bridge in opened condition, based on the reference height (vertical clearance datum) of the bridge. Don't fill this parameter in case of a fixed bridge. In case of unlimited height for an operable bridge fill in null.",
+                "oneOf": [
+                  { "type": "integer" },
+                  { "type": "null" }
+                ]
+              },
+              "abs_height_cm": {
+                "description": "Absolute height of the bridge based upon the used reference level for heights.",
+                "oneOf": [
+                  { "type": "integer" },
+                  { "type": "null" }
+                ]
+              },
+              "abs_height_open_cm": {
+                "description": "Absolute height of the open bridge (if applicable) based upon the used reference level for heights.",
+                "oneOf": [
+                  { "type": "integer" },
+                  { "type": "null" }
+                ]
+              },
+              "max_height_cm": {
+                "description": "Maximum allowed height of the vessel in cm. This shall be a fall-back default value for all ship categories, if no Sailing Dimensions table is provided. Normally this is cl_height_cm minus safety_margin. Null -> no height restriction.",
+                "oneOf": [
+                  { "type": "integer" },
+                  { "type": "null" }
+                ]
+              },
+              "max_height_open_cm": {
+                "description": "Maximum allowed height of the vessel in cm, if the bridge is operable and opened. This shall be a fall-back default value for all ship categories, if no Sailing Dimensions table is provided. Don't fill this parameter in case of a fixed bridge. Null -> no height restriction.",
+                "oneOf": [
+                  { "type": "integer" },
+                  { "type": "null" }
+                ]
+              },
+              "cl_width_cm": {
+                "description": "Available width in cm of (the fairway in) the Bridge Opening.",
+                "type": "integer"
+              },
+              "max_width_cm": {
+                "description": "Maximum allowed width of the vessel in cm. This shall be a fall-back default value for all ship categories, if no Sailing Dimensions table is provided.",
+                "oneOf": [
+                  { "type": "integer" },
+                  { "type": "null" }
+                ]
+              },
+              "pass_duration_minute": {
+                "description": "Average passage duration in minutes, if the bridge is operable. ETD = ETA + pass_duration_minute.",
+                "type": "integer",
+                "default": 0
+              },
+              "bridge_type": {
+                "description": "This attribute indicates the type of the bridge opening.",
+                "type": "integer",
+                "enum": [1, 3, 4, 5, 7, 12]
+              },
+              "operable": {
+                "description": "This attribute indicates, if the bridge opening can be operated in a way that it may be lifted to allow the passage of vessels that otherwise would exceed the clearance height (generally true for Lift Bridge and Drawbridge).",
+                "oneOf": [{"type": "boolean"}, {"type": "integer","minimum": 0, "maximum": 1}]
+              },
+              "operation_type": {
+                "description": "This attribute indicates how the bridge is operated, if it is an operable bridge. Allowed values: 0 (Local Operation), 1 (Remote Operation), 2 (Self-Service), 3 (Automatic), 4 (not applicable), null (unknown)",
+                "oneOf": [
+                  { "type": "integer", "enum": [0, 1, 2, 3, 4] },
+                  { "type": "null" }
+                ],
+                "default": null
+              },
+              "direction": {
+                "description": "This attribute indicates, if the bridge opening can only be passed by vessels coming from a certain direction. Allowed values: UPS (upstream), DWN (downstream), ALL (all directions)",
+                "type": "string",
+                "enum": ["UPS", "DWN", "ALL"],
+                "default": "ALL"
+              },
+              "position": {
+                "description": "The Position of the bridge opening. Allowed values: LE (Left), MI (Middle), RI (Right), LB (Left bank), RB (Right bank).",              
+                "oneOf": [
+                  { "type": "string", "enum": ["LE", "MI", "RI", "LB", "RB"]},
+                  { "type": "null" }
+                ],
+                "default": null
+              }
+            },
+            "required": [
+              "bridge_ref",
+              "cl_height_cm",
+              "cl_width_cm",
+              "bridge_type"
+            ],
+            "unevaluatedProperties": false
+          },
+          "geometry": {"$ref": "base/GeoJSONPoint_v3_0.json"}
+        }
+      }
+    }
+  }
+}
