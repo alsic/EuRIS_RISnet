@@ -1,0 +1,170 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gauge_v3_0.json",
+  "title": "RISNET gauge schema",
+  "type": "object",
+  "required": [
+    "type",
+    "features"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "FeatureCollection"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "title": "GeoJSON Feature",
+        "type": "object",
+        "required": [
+          "type", 
+          "properties", 
+          "geometry"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Feature"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "base/baseobject_v3_0.json"
+              }
+            ],
+            "properties": {
+              "network_section_ref": {
+                "$ref": "base/common_properties_v3_0.json#/properties/network_section_ref"
+              },
+              "un_locode": {
+                "$ref": "base/common_properties_v3_0.json#/properties/un_locode"
+              },
+              "un_loname": {
+                "$ref": "base/common_properties_v3_0.json#/properties/un_loname"
+              },
+              "fairway_km": {
+                "$ref": "base/common_properties_v3_0.json#/properties/fairway_km"
+              },
+              "ais_gauge_id": {
+                "description": "Gauge ID as used in Inland AIS ASM to identify the gauge station. Must be unique at country level.",
+                "oneOf": [
+                  {
+                    "type": "integer", 
+                    "minimum": 1, 
+                    "maximum": 2047
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "national_gauge_code": {
+                "description": "Optional field to maintain a link to an external gauge reference code.",
+                "oneOf": [
+                  {
+                    "type": "string", 
+                    "maxLength": 50
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "applicable_up_fairway_km": {
+                "description": "The upstream kilometer point up to which the measured water level from the gauge station is valid.",
+                "oneOf": [
+                  {
+                    "type": "number", 
+                    "multipleOf": 0.001
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "applicable_down_fairway_km": {
+                "description": "The downstream kilometer point down to which the measured water level from the gauge station is valid.",
+                "oneOf": [
+                  {
+                    "type": "number", 
+                    "multipleOf": 0.001
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "geod_ref_name": {
+                "description": "Code of the geodetic reference height (e.g., ADR, TAW, PUL, POT).",
+                "type": "string",
+                "maxLength": 10
+              },
+              "height_zpg_cm": {
+                "description": "Height of the Zero Point of the Gauge in cm.",
+                "type": "integer",
+                "minimum": 0,
+                "default": 0
+              },
+              "value_lnw": {
+                "description": "Height of Low Navigable Water (cm or m³/s).",
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                    }
+                ]
+              },
+              "value_rn": {
+                "description": "Height of Normal Water (cm or m³/s).",
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "value_hnw": {
+                "description": "Height of High Navigable Water (cm or m³/s).",
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "value_unit": {
+                "description": "Unit for LNW, RN, and HNW values.",
+                "type": "string",
+                "enum": [
+                  "cm",
+                  "m³/s"
+                ]
+              }
+            },
+            "required": [
+              "fairway_km",
+              "geod_ref_name",
+              "value_unit"
+            ],
+            "unevaluatedProperties": false
+          },
+          "geometry": {
+            "$ref": "base/GeoJSONPoint_v3_0.json"
+          }
+        }
+      }
+    }
+  }
+}

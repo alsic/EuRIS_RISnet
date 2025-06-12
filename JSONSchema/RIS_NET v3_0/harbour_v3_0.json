@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "harbour_v3_0.json",
+  "title": "RISNET harbour schema",
+  "type": "object",
+  "required": [
+    "type",
+    "features"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "FeatureCollection"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "title": "GeoJSON Feature",
+        "type": "object",
+        "required": [
+          "type",
+          "properties",
+          "geometry"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Feature"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "base/baseobject_v3_0.json"
+              }
+            ],
+            "properties": {
+              "port_ref": {
+                "$ref": "base/common_properties_v3_0.json#/properties/port_ref"
+              },
+              "un_locode": {
+                "$ref": "base/common_properties_v3_0.json#/properties/un_locode"
+              },
+              "un_loname": {
+                "$ref": "base/common_properties_v3_0.json#/properties/un_loname"
+              },
+              "object_reference_code": {
+                "description": "Object Reference Code, if needed for Electronic Reporting purposes.",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 5
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "distance_mark_ref": {
+                "$ref": "base/common_properties_v3_0.json#/properties/distance_mark_ref"
+              },
+              "fairway_ref": {
+                "$ref": "base/common_properties_v3_0.json#/properties/distance_mark_ref"
+              },
+              "fairway_from_km": {
+                "$ref": "base/common_properties_v3_0.json#/properties/fairway_ref"
+              },
+              "fairway_to_km": {
+                "$ref": "base/common_properties_v3_0.json#/properties/fairway_to_km"
+              },
+              "entry_exit_distance_mark_refs": {
+                "$ref": "base/common_properties_v3_0.json#/properties/entry_exit_distance_mark_refs"
+              },
+              "entry_exit_lock_refs": {
+                "$ref": "base/common_properties_v3_0.json#/properties/entry_exit_lock_refs"
+              },
+              "position": {
+                "$ref": "base/common_properties_v3_0.json#/properties/position"
+              }
+            },
+            "required": [
+              "distance_mark_ref",
+              "fairway_ref",
+              "fairway_from_km"
+            ],
+            "unevaluatedProperties": false
+          },
+          "geometry": {
+            "$ref": "base/GeoJSONPoint_v3_0.json"
+          }
+        }
+      }
+    }
+  }
+}

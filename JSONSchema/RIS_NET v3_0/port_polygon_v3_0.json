@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "port_polygon_v3_0.json",
+  "title": "RISNET port_polygon schema",
+  "type": "object",
+  "required": [
+    "type",
+    "features"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "FeatureCollection"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "title": "GeoJSON Feature",
+        "type": "object",
+        "required": [
+          "type",
+          "properties",
+          "geometry"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Feature"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "port_ref": {
+                "$ref": "base/common_properties_v3_0.json#/properties/port_ref"
+              }
+            },
+            "required": [
+              "port_ref"
+            ],
+            "unevaluatedProperties": false
+          },
+          "geometry": {
+            "$ref": "base/GeoJSONMultiPolygon_v3_0.json"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "boat_ramp_v3_0.json",
+  "title": "RISNET boat ramp schema",
+  "type": "object",
+  "required": [
+    "type",
+    "features"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "FeatureCollection"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "title": "GeoJSON Feature",
+        "type": "object",
+        "required": [
+          "type",
+          "properties",
+          "geometry"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Feature"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "base/baseobject_v3_0.json"
+              }
+            ],
+            "properties": {
+              "network_section_ref": {
+                "$ref": "base/common_properties_v3_0.json#/properties/network_section_ref"
+              },
+              "object_ref": {
+                "description": "RIS_ID of a related object.",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "object_type": {
+                "description": "Entity type name of the referenced object.",
+                "type": "string",
+                "maxLength": 50
+              },
+              "fairway_km": {
+                "$ref": "base/common_properties_v3_0.json#/properties/fairway_km"
+              },
+              "private_status": {
+                "$ref": "base/common_properties_v3_0.json#/properties/private_status"
+              },
+              "position": {
+                "$ref": "base/common_properties_v3_0.json#/properties/position"
+              }
+            },
+            "required": [
+              "network_section_ref",
+              "fairway_km"
+            ],
+            "unevaluatedProperties": false
+          },
+          "geometry": {
+            "$ref": "base/GeoJSONPoint_v3_0.json"
+          }
+        }
+      }
+    }
+  }
+}

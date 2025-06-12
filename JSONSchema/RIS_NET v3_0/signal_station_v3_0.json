@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "signal_station_v3_0.json",
+  "title": "RISNET signal_station schema",
+  "type": "object",
+  "required": [
+    "type",
+    "features"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "FeatureCollection"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "title": "GeoJSON Feature",
+        "type": "object",
+        "required": [
+          "type",
+          "properties",
+          "geometry"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Feature"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "base/baseobject_v3_0.json"
+              }
+            ],
+            "properties": {
+              "network_section_ref": {
+                "$ref": "base/common_properties_v3_0.json#/properties/network_section_ref"
+              },
+              "object_ref": {
+                "description": "RIS_ID of a related object",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "object_type": {
+                "description": "Entity type name",
+                "type": "string",
+                "maxLength": 50
+              },
+              "fairway_km": {
+                "$ref": "base/common_properties_v3_0.json#/properties/fairway_km"
+              },
+              "ss_type": {
+                "description": "Type/Purpose of Signal Station (Inland ECDIS 'catsit' and 'catsiw'). Allowed values: 2 (Port Entry and Departure), 6 (Lock), 8 (Bridge Passage), 10 (Traffic Control Light), 15 (High Water Mark), 16 (Vertical Clearance Indication), 18 (Depth Indication)",
+                "type": "integer",
+                "enum": [
+                  2, 
+                  6, 
+                  8, 
+                  10, 
+                  15, 
+                  16, 
+                  18
+                ]
+              },
+              "direction": {
+                "$ref": "base/common_properties_v3_0.json#/properties/direction"
+              },
+              "position": {
+                "$ref": "base/common_properties_v3_0.json#/properties/position"
+              },
+              "configuration": {
+                "description": "Configuration of the lights of the signal station",
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 14
+              },
+              "orient": {
+                "$ref": "base/common_properties_v3_0.json#/properties/orient"
+              }
+            },
+            "required": [
+              "network_section_ref",
+              "fairway_km",
+              "ss_type",
+              "direction"
+            ],
+            "unevaluatedProperties": false
+          },
+          "geometry": {
+            "$ref": "base/GeoJSONPoint_v3_0.json"
+          }
+        }
+      }
+    }
+  }
+}

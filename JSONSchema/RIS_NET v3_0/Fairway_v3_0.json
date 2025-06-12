@@ -1,0 +1,25 @@
+{
+  "$id": "fairway_v3_0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RISNET fairway schema",
+  "description": "Schema for the RISNET Fairway type",
+  "type": "array",
+  "items": {
+    "allOf": [
+      {
+        "$ref": "base/baseobject_v3_0.json"
+      }
+    ],
+    "properties": {
+      "waterway_ref": {
+        "description": "RIS_ID of the waterway the Fairway associated with.",
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "required": [
+      "waterway_ref"
+    ],
+    "unevaluatedProperties": false
+  }
+}

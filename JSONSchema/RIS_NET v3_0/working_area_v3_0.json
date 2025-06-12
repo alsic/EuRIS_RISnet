@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "working_area_v3_0.json",
+  "title": "RISNET working area schema",
+  "type": "object",
+  "required": [
+    "type",
+    "features"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "FeatureCollection"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "title": "Working Area Feature",
+        "type": "object",
+        "required": [
+          "type",
+          "properties",
+          "geometry"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Feature"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "base/baseobject_v3_0.json"
+              }
+            ],
+            "properties": {
+              "parent_working_area_ref": {
+                "description": "RIS_ID of the Working Area (WA) object the WA is belonging to. (used to establish a hierarchy for WA)",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "organisation": {
+                "description": "Name of the organisation.",
+                "type": "string",
+                "maxLength": 80
+              },
+              "working_area_types": {
+                "description": "Comma-separated list of working area type codes",
+                "type": "string",
+                "maxLength": 50
+              },
+              "working_area_rights": {
+                "description": "Comma-separated list codes of data access rights the linked organisation has in the covered area. Allowed values: 1 = AIS, 2 = ERI",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "organisation",
+              "working_area_types"
+            ],
+            "unevaluatedProperties": false
+          },
+          "geometry": {
+            "$ref": "base/GeoJSONMultiPolygon_v3_0.json"
+          }
+        }
+      }
+    }
+  }
+}

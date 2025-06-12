@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "bridge_v3_0.json",
+  "title": "RISNET bridge schema",
+  "type": "object",
+  "required": [
+    "type",
+    "features"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "FeatureCollection"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "title": "GeoJSON Feature",
+        "type": "object",
+        "required": [
+          "type",
+          "properties",
+          "geometry"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Feature"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "base/baseobject_v3_0.json"
+              }
+            ],
+            "properties": {
+              "network_section_ref": {
+                "$ref": "base/common_properties_v3_0.json#/properties/network_section_ref"
+              },
+              "gauge_ref": {
+                "$ref": "base/common_properties_v3_0.json#/properties/gauge_ref"
+              },
+              "un_locode": {
+                "$ref": "base/common_properties_v3_0.json#/properties/un_locode"
+              },
+              "un_loname": {
+                "$ref": "base/common_properties_v3_0.json#/properties/un_loname"
+              },
+              "fairway_km": {
+                "$ref": "base/common_properties_v3_0.json#/properties/fairway_km"
+              },
+              "height_ref_level_name": {
+                "$ref": "base/common_properties_v3_0.json#/properties/height_ref_level_name"
+              },
+              "vertical_clearance_val_cm": {
+                "$ref": "base/common_properties_v3_0.json#/properties/vertical_clearance_val_cm"
+              },
+              "vertical_clearance_datum": {
+                "$ref": "base/common_properties_v3_0.json#/properties/vertical_clearance_datum"
+              },
+              "safety_margin_cm": {
+                "$ref": "base/common_properties_v3_0.json#/properties/safety_margin_cm"
+              },
+              "orient": {
+                "$ref": "base/common_properties_v3_0.json#/properties/orient"
+              },
+              "strategic_point_type": {
+                "$ref": "base/common_properties_v3_0.json#/properties/strategic_point_type"
+              },
+              "berth_refs": {
+                "$ref": "base/common_properties_v3_0.json#/properties/berth_refs"
+              }
+            },
+            "required": [
+              "network_section_ref",
+              "fairway_km"
+            ],
+            "unevaluatedProperties": false
+          },
+          "geometry": {
+            "$ref": "base/GeoJSONPoint_v3_0.json"
+          }
+        }
+      }
+    }
+  }
+}

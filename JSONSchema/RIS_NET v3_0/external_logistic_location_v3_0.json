@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "external_logistic_location_v3_0.json",
+  "title": "RISNET external_logistic_location schema",
+  "type": "object",
+  "required": [
+    "type",
+    "features"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "FeatureCollection"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "title": "GeoJSON Feature",
+        "type": "object",
+        "required": [
+          "type",
+          "properties",
+          "geometry"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Feature"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "base/baseobject_v3_0.json"
+              }
+            ],
+            "properties": {
+              "object_ref": {
+                "$ref": "base/common_properties_v3_0.json#/properties/object_ref"
+              },
+              "object_type": {
+                "$ref": "base/common_properties_v3_0.json#/properties/object_type"
+              },
+              "un_locode": {
+                "$ref": "base/common_properties_v3_0.json#/properties/un_locode"
+              },
+              "un_loname": {
+                "$ref": "base/common_properties_v3_0.json#/properties/un_loname"
+              },
+              "object_reference_code": {
+                "$ref": "base/common_properties_v3_0.json#/properties/object_reference_code"
+              },
+              "Handling_options": {
+                "description": "For intermodal connections you need to know what the options are",
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 256
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "object_ref",
+              "object_type"
+            ],
+            "unevaluatedProperties": false
+          },
+          "geometry": {
+            "$ref": "base/GeoJSONPoint_v3_0.json"
+          }
+        }
+      }
+    }
+  }
+}

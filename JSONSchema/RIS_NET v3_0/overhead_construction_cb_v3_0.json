@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "overhead_construction_cb_v3_0.json",
+  "title": "RISNET overhead_construction_cb schema",
+  "type": "array",
+  "items": {
+    "allOf": [
+      {
+        "$ref": "base/baseobject_v3_0.json"
+      }
+    ],
+    "properties": {
+      "overhead_construction_ref": {
+        "description": "RIS_ID of the same object in the RIS Index of the other country, which shares the common border and is responsible for providing the geometric data. The reference is necessary, because some attributes (e.g. OBJ_NAME) might deviate from each other.",
+        "type": "string",
+        "format": "uuid"
+      },
+      "network_section_ref": {
+        "$ref": "base/common_properties_v3_0.json#/properties/network_section_ref"
+      },
+      "gauge_ref": {
+        "$ref": "base/common_properties_v3_0.json#/properties/gauge_ref"
+      },
+      "un_locode": {
+        "$ref": "base/common_properties_v3_0.json#/properties/un_locode"
+      },
+      "un_loname": {
+        "$ref": "base/common_properties_v3_0.json#/properties/un_loname"
+      },
+      "fairway_km": {
+        "$ref": "base/common_properties_v3_0.json#/properties/fairway_km"
+      },
+      "height_ref_level_name": {
+        "$ref": "base/common_properties_v3_0.json#/properties/height_ref_level_name"
+      },
+      "vertical_clearance_val_cm": {
+        "$ref": "base/common_properties_v3_0.json#/properties/vertical_clearance_val_cm"
+      },
+      "vertical_clearance_datum": {
+        "$ref": "base/common_properties_v3_0.json#/properties/vertical_clearance_datum"
+      },
+      "safety_margin_cm": {
+        "$ref": "base/common_properties_v3_0.json#/properties/safety_margin_cm"
+      },
+      "cl_height_cm": {
+        "$ref": "base/common_properties_v3_0.json#/properties/cl_height_cm"
+      },
+      "abs_height_cm": {
+        "$ref": "base/common_properties_v3_0.json#/properties/abs_height_cm"
+      }
+    },
+    "required": [
+      "overhead_construction_ref",
+      "network_section_ref",
+      "fairway_km",
+      "cl_height_cm"
+    ],
+    "unevaluatedProperties": false
+  }
+}

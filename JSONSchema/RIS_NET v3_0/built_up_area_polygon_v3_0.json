@@ -1,0 +1,61 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "built_up_area_polygon_v3_0.json",
+    "title": "RISNET built_up_area_polygon schema",
+    "type": "object",
+    "required": [
+      "type",
+      "features"
+    ],
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "FeatureCollection"
+        ]
+      },
+      "features": {
+        "type": "array",
+        "items": {
+          "title": "GeoJSON Feature",
+          "type": "object",
+          "required": [
+            "type",
+            "properties",
+            "geometry"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "Feature"
+              ]
+            },
+            "properties": {
+              "type": "object",
+              "allOf": [
+                {
+                  "$ref": "base/baseobject_v3_0.json"
+                }
+              ],
+              "properties": {
+                "built_up_area_ref": {
+                  "description": "RIS_ID of the built up area",
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "required": [
+                "built_up_area_ref"
+              ],
+              "unevaluatedProperties": false
+            },
+            "geometry": {
+              "$ref": "base/GeoJSONMultiPolygon_v3_0.json"
+            }
+          }
+        }
+      }
+    }
+  }
+  
