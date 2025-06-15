@@ -49,7 +49,7 @@
                 "$ref": "base/common_properties_v3_0.json#/properties/harbour_basin_ref"
               },
               "terminal_refs": {
-                "description": "IDs of the terminal object(s) the Berth is linked to (max 20 refs).",
+                "description": "IDs of the terminal object(s) the Berth is linked to (max 20 refs)",
                 "oneOf": [
                   {
                     "type": "string",
