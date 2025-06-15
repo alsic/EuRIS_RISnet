@@ -40,7 +40,7 @@
             ],
             "properties": {
               "barrage_ref": {
-                "description": "RIS_ID of the related barrage if the gate belongs to a barrage.",
+                "description": "RIS_ID of the related barrage if the gate belongs to a barrage",
                 "oneOf": [{"type": "string", "format": "uuid"}, {"type": "null"}]
               },
               "lock_basin_ref": {
