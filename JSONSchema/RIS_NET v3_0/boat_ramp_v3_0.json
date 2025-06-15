@@ -55,7 +55,7 @@
                 ]
               },
               "object_type": {
-                "description": "Entity type name of the referenced object.",
+                "description": "Entity type name of the referenced object",
                 "type": "string",
                 "maxLength": 50
               },
