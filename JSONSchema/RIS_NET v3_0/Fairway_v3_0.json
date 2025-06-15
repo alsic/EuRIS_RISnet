@@ -12,7 +12,7 @@
     ],
     "properties": {
       "waterway_ref": {
-        "description": "RIS_ID of the waterway the Fairway associated with. ",
+        "description": "RIS_ID of the waterway the Fairway associated with.",
         "type": "string",
         "format": "uuid"
       }
